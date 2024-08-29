@@ -26,13 +26,13 @@ import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.meesam.firstapp.models.ListItem
 
 @Composable
-fun QuoteListItem() {
+fun QuoteListItem(model: ListItem? = null) {
   Card(
-      elevation = CardDefaults.cardElevation(8.dp),
-      modifier = Modifier
-          .padding(8.dp)
+      elevation = CardDefaults.cardElevation(),
+
   ) {
      Row(modifier = Modifier
          .padding(16.dp)
@@ -50,7 +50,7 @@ fun QuoteListItem() {
          Column(modifier = Modifier
              .weight(1f)
          ) {
-             Text(text = "Title", style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold)
+             model?.title?.let { Text(text = it, style = MaterialTheme.typography.bodyLarge, fontWeight = FontWeight.Bold) }
              Spacer(modifier = Modifier.padding(2.dp))
              Box(modifier = Modifier
                  .background(Color.LightGray)
@@ -58,7 +58,7 @@ fun QuoteListItem() {
                  .height(1.dp)
              )
              Spacer(modifier = Modifier.padding(2.dp))
-             Text(text = "Subtitle", fontWeight = FontWeight.Thin)
+             model?.subTitle?.let { Text(text = it, fontWeight = FontWeight.Thin) }
          }
      }
   }
@@ -106,6 +106,6 @@ fun QuoteDetails(){
 @Preview
 @Composable
 private fun QuoteListItemPreview () {
-    //QuoteListItem()
-    QuoteDetails()
+    QuoteListItem()
+    //QuoteDetails()
 }
